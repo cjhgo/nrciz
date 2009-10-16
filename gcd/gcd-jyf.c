@@ -1,4 +1,11 @@
 #!/usr/bin/tcc -run
+/**
+    @File: gcd-jyf.c
+    @Date: 2009-10-16
+    @Author: jyf1987@gmail.com
+    @Comment: This Program's target is to get the 
+    @require: This program need a tinyCC as its interpreter
+**/
 
 #include <stdio.h>
 
