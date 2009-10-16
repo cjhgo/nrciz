@@ -1,4 +1,4 @@
-#!/usr/bin/tcc -run
+//#!/usr/bin/tcc -run
 /**
     @File: gcd-jyf.c
     @Date: 2009-10-16
@@ -14,6 +14,9 @@ int main(void){
 
     bigger = 25;
     smaller = 15;
+
+	printf("输入两个整数: ");
+	scanf("%d,%d",&bigger,&smaller);
 
     while( bigger % smaller ){
         bigger = bigger - smaller;
