@@ -34,7 +34,7 @@ int gcd(int a,int b)
 		b=c;
 	}while(c>0);
 
-	//return c;
+	return c;
 
 
 }
