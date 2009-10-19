@@ -10,7 +10,6 @@ echo "-----计算 $num1 和 $num2 的最大公约数-----"
 for i in *;
 do
 	if [ -x $i ];then
-		echo $i
 		if [ "x$i" == "xautotest" ] ;then continue; fi
 		echo "=> Run $i ..."
 		echo "$num1 $num2"|./$i $num1 $num2
