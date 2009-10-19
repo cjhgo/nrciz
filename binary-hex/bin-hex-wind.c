@@ -21,6 +21,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+char itoc(int v)
+{
+	if (v < 10)
+		return v + '0';
+	else if (v < 36)
+		return v + 'A' - 10;
+	else if (v < 62)
+		return v + 'a' - 36;
+	else {
+		fprintf(stderr,"出错了\n");
+		exit (1);
+	}
+}
 int main(int argc, char* argv[])
 {
 	if (4 != argc) {
@@ -37,9 +50,12 @@ int main(int argc, char* argv[])
 	char* p = buf;
 	while (sum) {
 		int c = sum % tbase;
-		sprintf(p++, "%x", c);
+		*p = itoc(c);
+		p++;
+		//sprintf(p++, "%x", c);
 		sum /= tbase;
 	}
+	*p = 0;
 
 	if (p != buf) {
 		p--;
