@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 if ($argc != 3) {
 	die("Usage: gcd-yetist.php <number> <number>\n");
