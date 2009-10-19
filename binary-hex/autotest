@@ -1,0 +1,25 @@
+#!/bin/sh
+rm *~
+make
+
+num1=`expr $RANDOM % 1000`
+num2=`expr $RANDOM % 20 + 2`
+
+echo "-----计算十进制数 $num1 转换成 $num2 进制数是多少-----"
+
+for i in *;
+do
+	if [ -x $i ];then
+		if [ "x$i" == "xautotest" ] ;then continue; fi
+		echo "=> Run $i ..."
+		case $i in
+			*wind)
+			./$i $num1 10 $num2
+			;;
+
+			*)
+			./$i $num1 $num2
+			;;
+		esac
+	fi
+done
