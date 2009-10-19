@@ -7,9 +7,9 @@
   辗转相除法,求得最小公约数:
  */
 int gcd(int i, int j)
-{
-  while((i != 0) && (j != 0)) {
-    if(i > j)
+{ 
+  while((i != 0) && (j != 0) && (i != j)) {
+    if(abs(i) > abs(j))
       i = i%j;
     else
       j = j%i;
