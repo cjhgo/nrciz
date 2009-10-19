@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
  
 	printf(" %d in %d 进制数为 \n",all,code);
 	for(j=i;j>=0;j--)
-		printf("%d",num[j]);
+		printf("%x",num[j]);
 	printf("\n\n");
 
 	return 0;
