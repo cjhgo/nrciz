@@ -1,0 +1,15 @@
+#!/bin/sh
+rm *~
+make
+
+for i in *;
+do
+	if [ -x $i ];then
+		echo $i
+		if [ "x$i" == "xautotest" ] ;then continue; fi
+		echo "=> Run $i ..."
+		echo "8646 2468"|./$i 8646 2468
+	fi
+done
+
+make clean
