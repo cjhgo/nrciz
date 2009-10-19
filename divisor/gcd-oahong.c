@@ -1,11 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdio.h>  //sscanf
+#include <stdlib.h> //exit
 //#define DEBUG 
 
+/*
+  http://zhidao.baidu.com/question/433388.html
+  辗转相除法,求得最小公约数:
+ */
 int gcd(int i, int j)
 {
-  int n;
-  if(i == j) return i;
   while((i != 0) && (j != 0)) {
     if(i > j)
       i = i%j;
@@ -26,6 +28,7 @@ int main(int argc, char * argv[1])
     exit(EXIT_FAILURE);
   }
 
+  // 参数 str -> int
   sscanf(argv[1], "%d", &n1);
   sscanf(argv[2], "%d", &n2);
 
