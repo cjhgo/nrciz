@@ -35,7 +35,7 @@ int main(int argc,char *argv[])
 {
 	int x,y,d=0;
 	printf ("input integer for x and y. \n");
-	scanf ("%d,%d",&x,&y);
+	scanf ("%d %d",&x,&y);
 	d = get_divisor(x,y);
 	printf ("%d and %d common divisor is %d. \n",x,y,d);
 		

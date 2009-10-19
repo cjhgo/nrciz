@@ -36,7 +36,7 @@ int get_common_divisor(int a, int b)
 int main ( int argc, char *argv[] )
 {
 	int a, b;
-	scanf("%d, %d", &a, &b);
+	scanf("%d %d", &a, &b);
 	printf("common divisor is %d\n", get_common_divisor(a, b));
 	return EXIT_SUCCESS;
 }				/* ----------  end of function main  ---------- */

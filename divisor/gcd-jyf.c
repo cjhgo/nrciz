@@ -16,7 +16,7 @@ int main(void){
     smaller = 15;
 
 	printf("输入两个整数: ");
-	scanf("%d,%d",&bigger,&smaller);
+	scanf("%d %d",&bigger,&smaller);
 
     while( bigger % smaller ){
         bigger = bigger - smaller;
