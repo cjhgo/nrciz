@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
 {
 	if (4 != argc) {
 		printf("用法\n %s 原数字 原进制 目标进制\n", argv[0]);
+		exit (1);
 	}
 
 	int obase = atoi(argv[2]);
