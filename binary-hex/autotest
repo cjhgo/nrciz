@@ -3,7 +3,7 @@ rm *~
 make
 
 num1=`expr $RANDOM % 1000`
-num2=`expr $RANDOM % 20 + 2`
+num2=`expr $RANDOM % 14 + 2`
 
 echo "-----计算十进制数 $num1 转换成 $num2 进制数是多少-----"
 
