@@ -25,14 +25,11 @@ int main(int argc,char *argv[1])
 		exit(EXIT_FAILURE);
 	}  
 
-	// 参数 str -> int
    sscanf(argv[1], "%d", &n1);
    sscanf(argv[2], "%d", &n2);
 
-   n3 = gcd(n1, n2);
-   //#ifdef DEBUG
-   //printf("%d\t%d\t%d\n", n1, n2, n3);
-   //#endif
+   n3 = gcd(abs(n1), abs(n2));
    printf("%d 和 %d 的最大公约数为: %d\n", n1, n2, n3);
+
    exit(EXIT_SUCCESS);
 }
