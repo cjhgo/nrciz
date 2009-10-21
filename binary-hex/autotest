@@ -1,7 +1,4 @@
 #!/bin/sh
-rm *~
-make
-
 num1=`expr $RANDOM % 1000`
 num2=`expr $RANDOM % 14 + 2`
 
