@@ -1,0 +1,14 @@
+http://projecteuler.net/index.php?section=problems&id=3
+
+13195的质因数是5,7,13,29
+请找出600851475143的最大质因数. 
+
+要求:
+
+打印
+   求600851475143的最大质因数 --author
+   result= xxx
+
+
+   结尾要回车
+
