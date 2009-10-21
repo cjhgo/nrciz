@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 102400
+#define MAX 1024000
 /** 简单的素数集合*/
 static long long primum[MAX] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
 
