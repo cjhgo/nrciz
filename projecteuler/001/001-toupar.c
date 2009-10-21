@@ -3,11 +3,16 @@
 
 int main(int argc,char *argv[1])
 {
-	int i,n;
-	long sum;
+	long sum,n,i;
 	sum=0;
+	
+	while(argc!=2)
+	{
+		fprintf(stderr,"本程序需一个参数，格式如下:\n%s 参数\n",argv[0]);
+		exit(EXIT_FAILURE);
+	}
 
-	sscanf(argv[1], "%d", &n);
+	sscanf(argv[1], "%ld", &n);
 	
 	for(i=3;i<n;++i)
 	{
@@ -16,6 +21,7 @@ int main(int argc,char *argv[1])
 			sum+=i;
 		}
 	}
-	printf("小于%d的约数含3或5的所有的自然数和为:%d\n",n,sum);
+	printf("小于%ld的数中约数含3或5的所有的数和为:%ld\n",n,sum);
+	return 0;
 
 }
