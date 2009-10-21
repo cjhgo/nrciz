@@ -7,8 +7,10 @@ def IsPrime(n):
     return True
     
 def MaxPrimeFactor(n):
-    for i in range(int(sqrt(n)),2,-1):
-        if n % i == 0 and IsPrime(i):
-            return i
+    i=2
+    while True:
+        if n % i == 0 and IsPrime(n/i):
+            return n/i
+        i+=1
             
 print MaxPrimeFactor(600851475143)

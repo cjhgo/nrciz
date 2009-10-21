@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 #endif
 
 #if 1
-	long long sum = 600851475143;
+	long long sum = 600851475143L;
 	//long long sum=13195;
 
 	int j = 0;
