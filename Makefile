@@ -11,4 +11,8 @@ all: $(BIN)
 clean: $(BIN)
 	rm $^
 
-.PHONY: clean
+test: all
+	@(rm  -f *~)
+	@(sh ./autotest)
+
+.PHONY: clean test

@@ -1,17 +1,21 @@
 #!/bin/sh
-rm *~
-make
-
 num1=`expr $RANDOM % 1000`
 num2=`expr $RANDOM % 1000`
 
 echo "-----计算 $num1 和 $num2 的最大公约数-----"
 
-for i in *;
+for i in `ls *|ls |grep -v "~$"`;
 do
 	if [ -x $i ];then
 		if [ "x$i" == "xautotest" ] ;then continue; fi
 		echo "=> Run $i ..."
-		echo "$num1 $num2"|./$i $num1 $num2
+		case $i in
+			*jyf|*lerosua|*shan|*twig|*wind)
+			echo $num1 $num2 | ./$i 
+			;;
+			*)
+			./$i $num1 $num2
+			;;
+		esac
 	fi
 done
