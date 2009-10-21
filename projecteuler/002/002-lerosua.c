@@ -17,29 +17,36 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-long int fib_sum(int num)
+long int fib(int num)
 {
-	long int second=2;
-	long int sum=1;
-	int i=1;
-
-	while(i<num)
-	{
-	sum+=second;
-	second=sum;
-	i++;
-	}
-	return sum;
+	if(num==0)
+		return 0;
+	else if(num==1)
+		return 1;
+	else if (num==2)
+		return 2;
+	return fib(num-1)+fib(num-2);
 }
+
 int main(int argc, char *argv[])
 {
  
-	int num=4000000;
-	if(argc==2)
-		num=atoi(argv[1]);
-	printf("求fibonacci数列%d个元素的和 --lerosua\n",num);
+	long int num=4000000;
+	int i=0;
+	long int sum=0;
+	long int out=0;
+	printf("从1开始，在小于4000000以内的所有Fib数中的偶数，求他们的和。 --lerosua\n");
 
-	printf("結果为 %ld\n",fib_sum(num));
+	do{
+		out=fib(i);
+		if(out%2==0)
+			sum+=out;
+		i++;
+	}while(out<num);
+
+
+	printf("結果为 %ld\n",sum);
 	return 0;
 }
