@@ -33,7 +33,7 @@ int main(int argc,char *argv[])
 	int su2=5;
 	int sum=0;
 	int sum2=0;
-	  printf("求%d 以下  %d  或 %d 的倍数的和\n",thound,su1,su2);
+	  printf("求%d 以下  %d  或 %d 的倍数的和 --lerosua \n",thound,su1,su2);
 
 	int i;
 	int add1=thound/su1;
