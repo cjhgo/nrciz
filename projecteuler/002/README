@@ -1,0 +1,7 @@
+
+
+http://projecteuler.net/index.php?section=problems&id=2
+Fibonacci数列Fn=F(n-1)+F(n-2)；从1开始，在小于4000000以内的所有Fib数中的偶数，求他们的和。
+
+数列开始示例
+1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
