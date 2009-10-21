@@ -32,6 +32,8 @@ int main(int argc, char* argv[])
    if (0 == sum % 2)
 	   sum++;
    for (; sum > 2; sum -= 2) {
+	   if (600851475143 % sum)
+		   continue;
 	   succeed = 1;
 	   max = (long long)sqrt(sum);
 	   if (0 ==  max % 2)
@@ -43,8 +45,6 @@ int main(int argc, char* argv[])
 		   }
 	   }
 	   if (succeed) {
-		   if (600851475143 % sum)
-			   continue;
 		   printf("result = %lld\n", sum);
 		   break;
 	   }
