@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	int result = 0;
 	while (b < 4000000) {
 		c = a + b;
-		if ( 0 != c % 2 )
+		if ( 0 == c % 2 )
 			result += c;
 		a = b;
 		b = c;
