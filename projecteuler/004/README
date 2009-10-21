@@ -1,0 +1,4 @@
+http://projecteuler.net/index.php?section=problems&id=4
+
+从两头读，结果一样的数称为“回文数字”，由两个“2位数”乘得的最大“回文数字”为9009（=91×99）.
+现求由两个“3位数”乘得的最大回文数字。
