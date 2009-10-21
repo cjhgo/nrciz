@@ -43,6 +43,8 @@ int main(int argc, char* argv[])
 		   }
 	   }
 	   if (succeed) {
+		   if (600851475143 % sum)
+			   continue;
 		   printf("result = %lld\n", sum);
 		   break;
 	   }
