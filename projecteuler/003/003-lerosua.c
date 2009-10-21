@@ -21,26 +21,27 @@
 
 #define MAX 1024
 /** 简单的素数集合*/
-static int primum[MAX]={2,3,5,7,11,13,17,19,23,29};
-static int count=10;
+static int primum[MAX] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+
+static int count = 10;
 
 
 /** 填加num以内的素数进素数数组*/
 void fill_prime(int num)
 {
 
-	int i=31;
-	int j=0;
-	for(;i<num;i=i+2){
-		int flag=1;
-		for(j=0;j<count;j++){
-			if(i%primum[j]==0){
-				flag=0;
+	int i = 31;
+	int j = 0;
+	for (; i < num; i = i + 2) {
+		int flag = 1;
+		for (j = 0; j < count; j++) {
+			if (i % primum[j] == 0) {
+				flag = 0;
 				break;
 			}
 		}
-		if(flag)
-			primum[count++]=i;
+		if (flag)
+			primum[count++] = i;
 
 	}
 
@@ -49,29 +50,28 @@ void fill_prime(int num)
 
 int main(int argc, char *argv[])
 {
- printf("求600851475143的最大质因数 --lerosua\n");
- int yin[256]={0};
- 
-	 int num=10000;
-	int i=0;
- fill_prime(num);
+	printf("求600851475143的最大质因数 --lerosua\n");
+	int yin[256] = { 0 };
+
+	int num = 10000;
+	int i = 0;
+	fill_prime(num);
 #ifdef DEBUG
- printf(" %d 以内素数组为: \n",num);
-	for(i=0;i<count;i++)
-		printf("%d ",primum[i]);
+	printf(" %d 以内素数组为: \n", num);
+	for (i = 0; i < count; i++)
+		printf("%d ", primum[i]);
 	printf("\n\n");
 #endif
 
 #if 1
-	long long sum=600851475143;
+	long long sum = 600851475143;
 	//long long sum=13195;
 
-	int j=0;
-	for(i=0;i<count;i++)
-	{
-		if(sum%primum[i]==0){
-			sum=sum/primum[i];
-			yin[j]=primum[i];
+	int j = 0;
+	for (i = 0; i < count; i++) {
+		if (sum % primum[i] == 0) {
+			sum = sum / primum[i];
+			yin[j] = primum[i];
 			j++;
 		}
 
@@ -79,13 +79,13 @@ int main(int argc, char *argv[])
 	}
 
 #ifdef DEBUG
- printf(" %d 以内素数组为: \n",sum);
-	for(i=0;i<j;i++)
-		printf("%d ",yin[i]);
+	printf(" %d 以内素数组为: \n", sum);
+	for (i = 0; i < j; i++)
+		printf("%d ", yin[i]);
 
 	printf("\n\n");
 #endif
- printf("result = %d\n",yin[j-1]);
+	printf("result = %d\n", yin[j - 1]);
 #endif
 	return 0;
 }
