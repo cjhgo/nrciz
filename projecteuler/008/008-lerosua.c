@@ -60,6 +60,12 @@ int main(int argc, char *argv[])
 	int maxsum=0;
 	
 	for(i=0;i<=995;i++){
+		if(num[i+4]==0)
+		{
+			i=i+4;
+			continue;
+		}
+			
 		for(j=0;j<5;j++)
 			sum*=num[j+i];
 		if(sum>maxsum)
