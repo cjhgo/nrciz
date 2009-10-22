@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define MAX 1024000
 /** 简单的素数集合*/
@@ -35,7 +36,8 @@ void fill_prime(long long num)
 	long int j = 0;
 	for (; i < num; i = i + 2) {
 		int flag = 1;
-		for (j = 0; j < count; j++) {
+		long long m=(long long)sqrt(i)+1;
+		for (j = 0; primum[j] < m; j++) {
 			if (i % primum[j] == 0) {
 				flag = 0;
 				break;
