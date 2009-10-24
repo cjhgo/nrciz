@@ -7,7 +7,7 @@
 # Version:  091024
 
 sum=0
-for i in `seq 1 1000`; do
+for i in `seq 1 999`; do
 	if [ "$(($i%3))" = 0 -o "$(($i%5))" = 0 ]; then
 		sum=$(($sum+$i))
 	fi
