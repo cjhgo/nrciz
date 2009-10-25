@@ -27,16 +27,10 @@ while(1==scanf("%d",&input))
 { 
 for (i=0;0!=input;input/=BASE){
 	x[i]=input%BASE;
-	printf("%d",x[i]);
-	i++;
-	printf("i= %d ", i);}
-for (;i>0;){
-	printf(" %d ",x[i]);
-	printf("i= %d",i);
-	i--;}
+	i++;}
+for (;i>=0;i--){
+	printf("%d",x[i]);}
 }
 
 return 0; 
 } 
-
-
