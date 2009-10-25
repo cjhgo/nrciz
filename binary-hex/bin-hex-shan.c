@@ -28,7 +28,7 @@ while(1==scanf("%d",&input))
 for (i=0;0!=input;input/=BASE){
 	x[i]=input%BASE;
 	i++;}
-for (;i>=0;i--){
+for (i--;i>=0;i--){
 	printf("%d",x[i]);}
 }
 
