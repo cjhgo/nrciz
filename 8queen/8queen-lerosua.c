@@ -79,13 +79,14 @@ void EQueen(int queen,int num)
 			if(flag){
 				qbuf[count++]=board[i+XSTART][j+YSTART];
 			}
-			if(count==8)
-				break;
 		}
+
 	if(count==8){
 		counter++;
-	for(i=0;i<BOUND;i++)
-		printf(" %2x ",qbuf[i]);
+		int m;
+		for(m=0;m<BOUND;m++)
+			printf(" %2x ",qbuf[m]);
+		printf("\n");
 	}
 
 }
