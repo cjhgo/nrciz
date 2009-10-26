@@ -13,7 +13,7 @@
  *         Author:  lerosua (), lerosua@gmail.com
  *        Company:  cyclone
  *
- *	在BOUNDXBOUND格的国际象棋上摆放八个皇后，使其不能互相攻击，
+ *	在8x8格的国际象棋上摆放八个皇后，使其不能互相攻击，
  *	即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法
  * =====================================================================================
  */
@@ -21,11 +21,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define BOUND 8
-#define START 3
+#define XSTART 3
+#define YSTART 3
 
 /** 采用象棋中的棋盘结构，范围是从
- * board[3][3]     board[3][10]
- * board[10][3]    board[10]10]
+ * board[4][3]     board[4][10]
+ * board[11][3]    board[11]10]
  * 值的范围是
  * 0x33    0x3a
  * 0xa3    0xaa
@@ -33,6 +34,8 @@
 int board[16][16];
 
 int counter=0;
+/**8个皇后放置的位置*/
+int qbuf[8]={0};
 
 /** queen 是皇后的位置
  *  enemy 是敌人的位置
@@ -56,29 +59,60 @@ int attack(int queen,int enemy)
 		return 0;
 }
 
-void EQueen(int queen)
+/** queen 皇后的位置
+ * 目前是第几个皇后
+ */
+void EQueen(int queen,int num)
 {
 	int i,j;
+	int k;
+	int count=num+1;
 	for(i=0;i<BOUND;i++)
 		for(j=0;j<BOUND;j++){
-			if(attack(queen,board[i+START][j+START]))
-				counter++;
+			int flag=1;
+			for(k=0;k<count;k++)
+				if(attack(qbuf[k],board[i+XSTART][j+YSTART]))
+				{
+					//printf("attack-%x   ",qbuf[k]);
+					flag=0;
+				}
+			if(flag){
+				qbuf[count++]=board[i+XSTART][j+YSTART];
+			}
+			if(count==8)
+				break;
 		}
+	if(count==8){
+		counter++;
+	for(i=0;i<BOUND;i++)
+		printf(" %2x ",qbuf[i]);
+	}
 
 }
 
 int main(int argc, char *argv[])
 {
 	int i,j;
+	//int k;
 
-	for(i=0;i<16;i++)
+	for(i=0;i<16;i++){
 		for(j=0;j<16;j++)
-			board[i][j]=i+j;
+		{
+			board[i][j]=i*16+j;
+			if(i>2&&i<11&& j>2&&j<11)
+			printf( "%2x ",board[i][j]);
+		}
+		printf("\n");
+	}
+
 
 	for(i=0;i<BOUND;i++)
 		for(j=0;j<BOUND;j++){
-			int queen_ = board[i+START][j+START];
-			EQueen(queen_);
+			//for(k=0;k<BOUND;k++){
+				int queen_ = board[i+XSTART][j+YSTART];
+				qbuf[0]=queen_;
+				EQueen(queen_,0);
+			//}
 		}
 
 
