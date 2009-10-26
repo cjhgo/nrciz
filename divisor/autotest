@@ -11,10 +11,10 @@ do
 		echo "=> Run $i ..."
 		case $i in
 			*jyf|*lerosua|*shan|*twig|*wind)
-			echo $num1 $num2 | time ./$i 
+			echo $num1 $num2 | ./$i 
 			;;
 			*)
-			time ./$i $num1 $num2
+			./$i $num1 $num2
 			;;
 		esac
 	fi
