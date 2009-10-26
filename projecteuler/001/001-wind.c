@@ -29,7 +29,7 @@
 
 int main()
 {
-	printf("求 1000 以下 3 或 5 的倍数的和\n");
+	//printf("求 1000 以下 3 或 5 的倍数的和\n");
 	int sum1 = 0;
 	int sum2 = 0;
 

@@ -34,8 +34,8 @@ int main(int argc,char *argv[])
 	int sum=0;
 	int sum2=0;
 	  printf("求%d 以下  %d  或 %d 的倍数的和 --lerosua \n",thound,su1,su2);
-
 	int i;
+#if 0
 	int add1=thound/su1;
 	int add2=thound/su2;
 	if( thound%su1==0)
@@ -53,6 +53,7 @@ int main(int argc,char *argv[])
 	for(i=1;i<=add3;i++)
 		sum -=i*su3;
 	printf("结果是 %d\n",sum);
+#endif
 	
 	/** 看了bones的code后才发现我傻啊*/
 	for(i=1;i<1000;i++)
