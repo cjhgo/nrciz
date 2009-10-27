@@ -1,2 +1,2 @@
 #!/usr/bin/env python
-print sum([n**n for n in range(1,1001) ])
+print str(sum([n**n for n in range(1,1001) ]))[-10:]
