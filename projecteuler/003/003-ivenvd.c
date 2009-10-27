@@ -26,10 +26,6 @@ check_prime (long num)
 {
     int i;
     static char flag = 0;                           /* 嵌套标志 */
-    if (flag && (num % 5 == 0 || num % 2 == 0)) {
-        flag = 0;
-        return 1;
-    }
     for (i = sqrt (num); i > 1; i--) {
         switch (i % 10) {
             case 1:	
