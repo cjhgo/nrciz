@@ -6,11 +6,19 @@ def IsPrime(n):
             return False
     return True
     
-def MaxPrimeFactor(n):
-    i=2
-    while True:
-        if n % i == 0 and IsPrime(n/i):
-            return n/i
-        i+=1
-            
-print MaxPrimeFactor(600851475143)
+def GetFactors(n):
+    r=[1]
+    for i in range(2, int(sqrt(n))):
+        if n % i == 0:
+            r.append(i)
+            r.append(n/i)
+    if sqrt(n) == int(sqrt(n)):
+        r.append(sqrt(n))
+    r.sort(reverse=1)
+    return r
+
+for i in GetFactors(600851475143):
+    if IsPrime(i):
+        print i
+        break
+#print MaxPrimeFactor(600851475143)
