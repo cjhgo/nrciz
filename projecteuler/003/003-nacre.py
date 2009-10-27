@@ -1,10 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import math
 
 def max_prime_factor(n):
     while n % 2 == 0:
         n /= 2
-
     i = 3
     sqrt_n = math.sqrt(n)
     while i < sqrt_n:
@@ -13,7 +12,6 @@ def max_prime_factor(n):
             sqrt_n = math.sqrt(n)
         else:
             i += 2
-
     return n
 
 print max_prime_factor(600851475143)

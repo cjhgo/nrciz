@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 maxnum = 0
 for i in range(990, 99, -11):

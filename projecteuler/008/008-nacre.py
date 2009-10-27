@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 def get_product(s):
     product = 1
@@ -31,7 +31,7 @@ s ='\
 
 max_product = 0
 n = 5
-for i in range(len(s)-n):
-    max_product = max(get_product(s[i:i+n]), max_product)
+for i in range(len(s) - n):
+    max_product = max(get_product(s[i: i + n]), max_product)
 
 print max_product

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 def sum_multiple(feed, limit):
     return feed * ((limit - 1) / feed) * ((limit - 1) / feed + 1) / 2

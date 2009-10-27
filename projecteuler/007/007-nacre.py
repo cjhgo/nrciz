@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import math
 
@@ -6,9 +6,9 @@ import math
 ubound = 500000
 list_int = range(2, ubound)
 
-for i in range(int(math.sqrt(ubound-1))):
+for i in range(int(math.sqrt(ubound - 1))):
     if list_int[i] != 0:
-	for j in range(i+list_int[i], ubound-2, list_int[i]):
+	for j in range(i+list_int[i], ubound - 2, list_int[i]):
 	    list_int[j] = 0
 
 i = 0
@@ -18,4 +18,4 @@ while numPrime < 10001:
 	numPrime += 1
     i += 1
 
-print list_int[i-1]
+print list_int[i - 1]
