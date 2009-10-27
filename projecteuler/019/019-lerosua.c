@@ -24,7 +24,7 @@
 
 int mon[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 int week[7]={0,0,0,0,0,0,1};
-int week_flag=1;
+int week_flag=0;
 int counter=0;
 int main(int argc, char *argv[])
 {
@@ -33,9 +33,9 @@ int main(int argc, char *argv[])
 	int day=0;
 	int leap=0;
 	int i;
-	for(year=1901;year<2001;year++)
+	for(year=1900;year<2001;year++)
 	{
-		if((year%4==0) && (year%400 !=0))
+		if(year%4==0 || (year%100==0 && year%400==0))
 			leap=1;
 		else
 			leap=0;
@@ -43,15 +43,15 @@ int main(int argc, char *argv[])
 		for(i=0;i<12;i++){
 			for(day=0;day<mon[i];day++){
 				
-				if(week[week_flag]==1 && day==0)
+				if(year>1900 && week[week_flag]==1 && day==0)
 					counter++;
 				week_flag++;
-				if(week_flag>7)
+				if(week_flag>6)
 					week_flag=week_flag-7;
 				
 				if(i==1 && day==27){
 					week_flag=week_flag+leap;
-					if(week_flag>7)
+					if(week_flag>6)
 						week_flag=week_flag-7;
 
 				}
