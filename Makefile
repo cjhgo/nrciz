@@ -1,7 +1,7 @@
 CC     = gcc
 
 CFLAGS  = -Wall
-LDFLAGS = 
+LDFLAGS =  -lm
 
 SRC = $(notdir $(wildcard *.c))
 BIN = $(patsubst %.c,%,$(SRC))

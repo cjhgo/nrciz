@@ -42,7 +42,6 @@ void fibs(int m)
 		n = a+b;
 		a = b;
 		b = n;
-		printf("%d ", n);
 		if (n % 2 == 0)
 			sum += n;
 	}
