@@ -31,7 +31,9 @@ int qinghe(int num)
 	for(i=2;i<m;i++){
 		if(num%i==0){
 			sum+=i;
-			sum+=num/i;
+			/**防止加了完全平方数*/
+			if(i != num/i)
+				sum+=num/i;
 		}
 	}
 	return sum;
