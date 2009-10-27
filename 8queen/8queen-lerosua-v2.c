@@ -49,9 +49,9 @@ int attack(int queen,int enemy)
 	int d_x=enemy&0xf;
 	int d_y=enemy>>4;
 
-	if( q_x  == (enemy&15))          /** 同一横线*/
+	if( q_x  == d_x)          /** 同一横线*/
 		return 1;
-	else if( q_y  == (enemy>>4))	/** 同一纵线*/
+	else if( q_y  == d_y)	/** 同一纵线*/
 		return 1;
 	else if( abs(q_x-d_x) == abs(q_y-d_y))   /** 同一斜线*/
 		return 1;
@@ -81,12 +81,82 @@ void EQueen(int queen,int num)
 			}
 		}
 
-	if(count==8){
+	if(count>7){
 		counter++;
 		int m;
 		for(m=0;m<BOUND;m++)
 			printf(" %2x ",qbuf[m]);
 		printf("\n");
+	}
+
+}
+void jEQueen(int queen,int num)
+{
+	int i,j;
+	int k;
+	//int count=num+1;
+	int count=num;
+
+	
+
+
+	for(i=0;i<BOUND;i++)
+		for(j=0;j<BOUND;j++){
+			int queen_ = board[i+XSTART][j+YSTART];
+			//qbuf[count]=queen_;
+
+			int flag=1;
+			for(k=0;k<count;k++)
+				if(attack(qbuf[k],board[i+XSTART][j+YSTART]))
+				{
+					//printf("attack-%x   ",qbuf[k]);
+					flag=0;
+				}
+			if(flag){
+				qbuf[count++]=board[i+XSTART][j+YSTART];
+				//printf("qbuf[%d] = %2x ",count-1,qbuf[count-1]);
+				if(count==BOUND){
+					counter++;
+					int m;
+					for(m=0;m<BOUND;m++)
+					printf(" %2x ",qbuf[m]);
+					printf("\n");
+					return;
+				}
+				//printf("attack-%x   ",qbuf[num]);
+				jEQueen(queen_,count);
+			}
+
+		}
+}
+void dEQueen(int num)
+{
+	if(num==BOUND){
+		counter++;
+#ifdef DEBUG
+		int m;
+		for(m=0;m<BOUND;m++)
+		printf(" %2x ",qbuf[m]);
+		printf("\n");
+#endif
+		return;
+	}
+
+	int i,k;
+	for(i=0;i<BOUND;i++){
+		int queen_ = board[i+XSTART][num+YSTART];
+		int flag=1;
+		for(k=0;k<num;k++)
+			if(attack(qbuf[k],queen_))
+				flag=0;
+		if(flag){
+			qbuf[num]=queen_;
+			//qbuf[num++]=queen_;
+			//if(num==7)
+			//	printf(" %2x ",qbuf[num-1]);
+			dEQueen(num+1);
+			//dEQueen(num);
+		}
 	}
 
 }
@@ -100,26 +170,36 @@ int main(int argc, char *argv[])
 		for(j=0;j<16;j++)
 		{
 			board[i][j]=i*16+j;
+#ifdef DEBUG
 			if(i>2&&i<11&& j>2&&j<11)
 			printf( "%2x ",board[i][j]);
+#endif
 		}
+#ifdef DEBUG
 		printf("\n");
+#endif
 	}
 
-
+	dEQueen(0);
+#if 0
 	for(i=0;i<BOUND;i++)
-		for(j=0;j<BOUND;j++){
+		for(j=0;j<BOUND;j++)
+		{
 			//for(k=0;k<BOUND;k++){
 				int queen_ = board[i+XSTART][j+YSTART];
 				qbuf[0]=queen_;
-				EQueen(queen_,0);
+				//printf("qbuf[0] = %2x ",qbuf[0]);
+				jEQueen(queen_,1);
 			//}
 		}
 
-
-
+#endif
+	
 
  
 	printf("%d\n",counter);
 	return 0;
 }
+
+
+
