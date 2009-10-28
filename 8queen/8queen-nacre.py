@@ -45,5 +45,5 @@ def r(p):
 n = 8
 vp, up = get_solution(n)
 print n, "queens problem"
-print "number of valid solution ", len(vp)
-print "number of unique solution", len(up)
+print "number of valid solutions ", len(vp)
+print "number of unique solutions", len(up)
