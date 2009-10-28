@@ -3,10 +3,16 @@
 def get_solution(n):
     from itertools import permutations
     vp, up = [], []
+    pass_count = 0
     # p[i] = j means that the queen is on i-th column, j-th row
     for p in permutations(range(n)):
-        if is_solution(p):
-            vp.append(list(p))
+        if pass_count:
+            pass_count -= 1
+            pass
+        else:
+            flag, pass_count = is_solution(p)
+            if flag:
+                vp.append(list(p))
     cp = vp[:]
     while len(cp) != 0:
         p = cp[0]
@@ -19,12 +25,13 @@ def get_solution(n):
     return vp, up
 
 def is_solution(p):
+    from math import factorial
     n = len(p)
-    for i in range(n - 1):
-        for j in range(i + 1, n):
-            if abs(p[i]-p[j]) == j-i:
-                return 0
-    return 1
+    for i in range(1, n):
+        for j in range(i):
+            if abs(p[i] - p[j]) == i - j:
+                return 0, factorial(n - 1 - i) - 1
+    return 1, 0
 
 # transpose
 def t(p):
