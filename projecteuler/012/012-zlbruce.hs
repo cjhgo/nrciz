@@ -14,7 +14,7 @@ getNumOfDivisor num = genNumOfDivisor 0 [2..isqrt num] + 2
             | mod == 0 = genNumOfDivisor count' xs
             | otherwise = genNumOfDivisor count xs
               where (div,mod) = num `quotRem` x 
-                    count' = if div == mod then count + 1 else count + 2
+                    count' = if div == x then count + 1 else count + 2
 
 -- 编译之后运行吧，要不很慢...
 -- ghc -O2 --make 012-zlbruce.hs
