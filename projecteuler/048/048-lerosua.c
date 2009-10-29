@@ -20,7 +20,7 @@
 
 #define DEBUG
 /** 定位数位*/
-#define NUM 4000
+#define NUM 10
 
 /** NUM位数的大数加法，类似sum+=num*/
 void add(int sum[],int num2[]);
