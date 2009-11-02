@@ -16,14 +16,11 @@ def IsPrime(n):
             f+=6
     return True
 
-def p41():
-    # no 8/9 -digit
+def p41():    
     l = '987654321'
-    for i in range(7,0,-1):
+    for i in range(7,0,-1):# no 8/9-digit
         for j in itertools.permutations(l[9-i:]):
-            s = ''
-            for c in j:
-                s+=c
-            if set(s) == set(l[9-i:]) and IsPrime(int(s)):
+            s = reduce(lambda x,y:x+y,j,'')
+            if IsPrime(int(s)):
                 return s
 print p41()
