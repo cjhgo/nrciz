@@ -23,28 +23,10 @@ rawData = [ [75],
 --            [2,4,6],
 --            [8,5,9,3] ]
 
--- 我把三角形倒过来了，便于遍历
-reverseData = reverse rawData
 
--- 由前一行的权值和这样的数据，返回这行最大的权值
-step pre cur 
-    | isEmpty = listArray (1, length cur) $ map (\x -> (x, [x])) cur
-    | otherwise = step' [] 1 cur
-    where step' res _ [] = listArray (1, length res) $ reverse res
-          step' res n (x:xs) = step' res' (n+1) xs
-            where res' = add:res
-                  (w1,p1) = pre!n
-                  (w2,p2) = pre!(n+1)
-                  (w',p') = if w1 > w2 then (w1,p1) else (w2,p2)
-                  add = (w'+x, x:p')
-          isEmpty = b == e
-            where (b,e) = bounds pre
+main = print $ head $ foldr1 getMaxPath rawData
 
-
-getWightPath x = genWightPath (array (1,1) []) x
-    where genWightPath res [] = res
-          genWightPath res (x:xs) = genWightPath res' xs
-            where res' = step res x
-
-
-main = print $ head.elems $ getWightPath reverseData
+getMaxPath [] _ = []
+getMaxPath (x:xs) (w1:w2:ws) 
+    | w1 > w2 = (x+w1) : getMaxPath xs (w2:ws)
+    | otherwise = (x+w2) : getMaxPath xs (w2:ws)
