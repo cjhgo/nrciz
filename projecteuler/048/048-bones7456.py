@@ -1,3 +1,4 @@
 #!/usr/bin/env python
 
-print str(sum(i**i for i in range(1,1001)))[-10:]
+a=10**10
+print str(sum(pow(i,i,a) for i in range(1,1001)))[-10:]
