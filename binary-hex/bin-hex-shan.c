@@ -86,18 +86,19 @@ int main(int argc,char *argv[])
 			while(sum)
 			{
 				int x;
-				sum/=tbin;
 				x=sum%tbin;
+				sum/=tbin;
 				push(&S,x);
 			}
-			int j;
+			int j = 0;
 			while (!stackempty(&S)){
 				int e;
 				pop(&S,&e);
-				buf[j] = e;
+				buf[j] = e + '0';
 				j++;
 				//printf("buf= %s",buf);
 			}
+			buf[j] = 0;
 		}
 /*		else
 		{
