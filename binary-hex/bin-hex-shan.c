@@ -50,6 +50,7 @@ int push (struct Stack *s, int var)
 	if (s->p == s->pend)
 		return 0;
 	*(s->p)++ = var;
+	//*(s->p)-- = var;
 	return 1;
 }
 
@@ -84,13 +85,18 @@ int main(int argc,char *argv[])
 			initstack(&S);
 			while(sum)
 			{
+				int x;
 				sum/=tbin;
-				push(&S,sum%=tbin);
+				x=sum%tbin;
+				push(&S,x);
 			}
-			while(!stackempty(&S)){
+			int j;
+			while (!stackempty(&S)){
 				int e;
 				pop(&S,&e);
-				*buf = e;
+				buf[j] = e;
+				j++;
+				//printf("buf= %s",buf);
 			}
 		}
 /*		else
