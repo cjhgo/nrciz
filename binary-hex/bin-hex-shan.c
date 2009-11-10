@@ -41,8 +41,8 @@ struct Stack{
 
 void initstack(struct Stack *s)
 {
-	s-> p = (int*)malloc(1024 *  sizeof(int));
-	s-> pend = s->p + 1024;
+	s->p = (int*)malloc(1024 *  sizeof(int));
+	s->pend = s->p + 1024;
 }
 
 int push (struct Stack *s, int var)
@@ -68,14 +68,15 @@ int main(int argc,char *argv[])
 {
 	if (4 != argc){
 		printf ("\n 用法：%s 原数字 原进制 目标进制。\n", argv[0]);
-		exit (1);}
+		exit (1);
+	}
 		int sbin = atoi(argv[2]);
 		int tbin = atoi(argv[3]);
 		int sum = strtol(argv[1],NULL,sbin);
 	if (sbin <= 0 || tbin <=0 || sum <=0){
 		printf ("\n 请正确使用本程序，检查输入。\n");
-		exit (1);}
-		
+		exit (1);
+	}
 		char buf[256];
 		struct Stack S;
 		//printf("sbin= %d,tbin= %d,sum= %d \n",sbin,tbin,sum);
