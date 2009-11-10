@@ -23,16 +23,16 @@
 char itoc(int v)
 {
 	if (v < 10)
-		return v + '0';
+	        return v + '0';
 	else if (v < 36)
-		return v + 'A' - 10;
+	        return v + 'A' - 10;
 	else if (v < 62)
-		return v + 'a' - 36;
+	        return v + 'a' - 36;
 	else {
-		fprintf(stderr,"出错了\n");
-		exit (1);}
+	        fprintf(stderr,"出错了\n");
+	        exit (1);
+	}
 }
-
 
 struct Stack{
 	int *p;
@@ -50,7 +50,6 @@ int push (struct Stack *s, int var)
 	if (s->p == s->pend)
 		return 0;
 	*(s->p)++ = var;
-	//*(s->p)-- = var;
 	return 1;
 }
 
@@ -61,7 +60,6 @@ int stackempty(struct Stack *s)
 
 void pop(struct Stack* s, int* var)
 {
-	//s->p++;
 	s->p--;
 	*var = *(s->p);
 }
@@ -74,19 +72,21 @@ int main(int argc,char *argv[])
 		int sbin = atoi(argv[2]);
 		int tbin = atoi(argv[3]);
 		int sum = strtol(argv[1],NULL,sbin);
+	if (sbin <= 0 || tbin <=0 || sum <=0){
+		printf ("\n 请正确使用本程序，检查输入。\n");
+		exit (1);}
+		
 		char buf[256];
-		//void initstack(int **p);
-
-		printf("sbin= %d,tbin= %d,sum= %d \n",sbin,tbin,sum);
-
 		struct Stack S;
-		//if (sbin>tbin)
+		//printf("sbin= %d,tbin= %d,sum= %d \n",sbin,tbin,sum);
+
 		{
 			initstack(&S);
 			while(sum)
 			{
-				int x;
-				x=sum%tbin;
+				int c = sum % tbin;
+				char x;
+			        x = itoc(c);
 				sum/=tbin;
 				push(&S,x);
 			}
@@ -94,29 +94,15 @@ int main(int argc,char *argv[])
 			while (!stackempty(&S)){
 				int e;
 				pop(&S,&e);
-				buf[j] = e + '0';
+				//buf[j] = e + '0';
+				buf[j] = e ;
 				j++;
-				//printf("buf= %s",buf);
 			}
 			buf[j] = 0;
 		}
-/*		else
-		{
-			initstack(&S);
-			while(sum){
-				//push(&S,sum *= power(tbin,i));
 
-			}
-			while(!stackempty(&S)){
-				int e;
-				pop(&S,&e);
-				*buf = e;
-			}
-			printf("该程序只能大转小，请重新输入运行！ \n");
-		}*/
+	printf("%s 进制数 %s 的 %s 进制为 %s 。\n",argv[2],argv[1],argv[3],buf);
 
-		printf("%s 的 %s 进制数为 %s 。\n",argv[1],argv[3],buf);
-
-		return 0;
+	return 0;
 }
 
