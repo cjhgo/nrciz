@@ -60,7 +60,8 @@ int stackempty(struct Stack *s)
 
 void pop(struct Stack* s, int* var)
 {
-	s->p++;
+	//s->p++;
+	s->p--;
 	*var = *(s->p);
 }
 
@@ -78,13 +79,13 @@ int main(int argc,char *argv[])
 		printf("sbin= %d,tbin= %d,sum= %d \n",sbin,tbin,sum);
 
 		struct Stack S;
-		if (sbin>tbin)
+		//if (sbin>tbin)
 		{
 			initstack(&S);
 			while(sum)
 			{
-				push(&S,sum%tbin);
 				sum/=tbin;
+				push(&S,sum%=tbin);
 			}
 			while(!stackempty(&S)){
 				int e;
@@ -92,7 +93,7 @@ int main(int argc,char *argv[])
 				*buf = e;
 			}
 		}
-		else
+/*		else
 		{
 			initstack(&S);
 			while(sum){
@@ -105,7 +106,7 @@ int main(int argc,char *argv[])
 				*buf = e;
 			}
 			printf("该程序只能大转小，请重新输入运行！ \n");
-		}
+		}*/
 
 		printf("%s 的 %s 进制数为 %s 。\n",argv[1],argv[3],buf);
 
