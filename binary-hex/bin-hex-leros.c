@@ -22,14 +22,15 @@
 
 int main(int argc, char *argv[])
 {
-	if (3 != argc) {
-		printf("用法\n %s 原数字 目标进制\n", argv[0]);
+	if (4 != argc) {
+		printf("用法\n %s 原数字 原进制 目标进制\n", argv[0]);
 		return -1;
 	}
-	int obase = atoi(argv[1]);
-	int code= atoi(argv[2]);
+	int obase = atoi(argv[2]);
+	int code= atoi(argv[3]);
 
 	int all=obase;
+	obase= strtol(argv[1], NULL, all);
 	int i=0;
 	int j=0;
 
