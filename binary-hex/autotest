@@ -1,8 +1,11 @@
 #!/bin/sh
-num1=`expr $RANDOM % 1000`
-num2=`expr $RANDOM % 14 + 2`
+num1=`expr $RANDOM % 10000`
+num2=`expr $RANDOM % 14 + 10`
+num3=`expr $RANDOM % 34 + 2`
 
-echo "-----计算十进制数 $num1 转换成 $num2 进制数是多少-----"
+make build
+
+echo "-----计算 $num2 进制数 $num1 转换成 $num3 进制数是多少-----"
 
 for i in *;
 do
@@ -11,11 +14,11 @@ do
 		echo "=> Run $i ..."
 		case $i in
 			*wind|*shan|*bones7456.py)
-			./$i $num1 10 $num2
+			./$i $num1 $num2 $num3
 			;;
 
 			*)
-			./$i $num1 $num2
+			./$i $num1 $num3
 			;;
 		esac
 	fi
