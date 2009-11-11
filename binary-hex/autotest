@@ -10,7 +10,7 @@ do
 		if [ "x$i" == "xautotest" ] ;then continue; fi
 		echo "=> Run $i ..."
 		case $i in
-			*wind)
+			*wind|*shan|*bones7456.py)
 			./$i $num1 10 $num2
 			;;
 
