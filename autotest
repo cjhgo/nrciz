@@ -13,5 +13,23 @@ do
 			time ./$i 
 			;;
 		esac
+	else
+		case "${i##*.}" in
+			py)
+			printf "\033[1;1m===> Run $i ... \033[1;0m\n" >&2
+			[ x`which python 2>/dev/null` = x"" ] && echo -e "\e[41;1m No python \e[0m" || \
+			time python $i
+			;;
+			rb)
+			printf "\033[1;1m===> Run $i ... \033[1;0m\n" >&2
+			[ x`which ruby 2>/dev/null` = x"" ] && echo -e "\e[41;1m No ruby \e[0m" || \
+			time ruby $i
+			;;
+			hs)
+			printf "\033[1;1m===> Run $i ... \033[1;0m\n" >&2
+			[ x`which runghc 2>/dev/null` = x"" ] && echo -e "\e[41;1m No ghc \e[0m" || \
+			time runghc $i
+			;;
+		esac
 	fi
 done
