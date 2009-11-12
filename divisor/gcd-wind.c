@@ -23,9 +23,12 @@ int get_common_divisor(int a, int b)
 {
 	if (b > a)
 		swap(a, b);
+	printf ("a=%d,b=%d\n",a,b);
 	int c = 0;
 	for (;;) {
 		c = a % b;
+		//printf("c=%d\n",c);
+		printf("a=%d,b=%d,c=%d,\n",a,b,c);
 		if (0 == c)
 			return b; 
 		a = c;

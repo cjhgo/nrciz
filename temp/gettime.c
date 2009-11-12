@@ -15,35 +15,21 @@
  *
  * =====================================================================================
  */
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-int get_divisor(int x,int y)
+int getTime(char *time_str,int timezone)
 {
+	int clock;
+	char c=:,t[1]='0';
+	colck = strchr(time_str,c);
+	colck = colck-2;
+	strncpy(t1,time_str+colck,2);
+	int timet = atoi(t1);
+	int ntime = timet + timezone;
+	if (ntime >=24) 
+		ntime-=24;
+	return ntime;
 
-	if (y > x)
-		x ^= y, y ^= x, x ^= y;
-	int d = 0;
-	for (;;) {
-		d = x % y;
-		if (0 == d)
-			return y;
-		x = y, y = d;
-	}
 }
-
-int main(int argc,char *argv[])
-{
-	int x,y,d=0;
-	printf ("input integer for x and y. \n");
-	char ic[11];
-	scanf("%d,%d", &x, &y);
-	printf(" x = %d, y = %d \n",x,y);
-	scanf("%s",ic);
-	d = get_divisor(x,y);
-	printf("%d and %d common divisor is %d. \n",x,y,get_divisor(x, y));
-	printf("%s",ic);	
-	
-	return 0;
-}
-

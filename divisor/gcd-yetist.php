@@ -9,6 +9,7 @@ $b = $argv[2];
 for(;;)
 {
 	$c = $a % $b;
+	echo "$a,$b,$c,\n";
 	if ($c == 0)
 		break;
 	$a = $c;
