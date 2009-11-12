@@ -6,9 +6,9 @@ def IsPrime(n):
             return False
     return True
     
-n,x = 0,1
+n,x = 1,1
 while n < 10001:
-    x+=1
+    x+=2
     if IsPrime(x):
         n+=1
 print x
