@@ -25,6 +25,15 @@ do
 			[ x`which ruby 2>/dev/null` = x"" ] && echo -e "\e[41;1m No ruby \e[0m" || \
 			time ruby $i
 			;;
+			sh)
+			printf "\033[1;1m===> Run $i ... \033[1;0m\n" >&2
+			time sh $i
+			;;
+			lua)
+			printf "\033[1;1m===> Run $i ... \033[1;0m\n" >&2
+			[ x`which lua 2>/dev/null` = x"" ] && echo -e "\e[41;1m No lua \e[0m" || \
+			time lua $i
+			;;
 			hs)
 			printf "\033[1;1m===> Run $i ... \033[1;0m\n" >&2
 			[ x`which runghc 2>/dev/null` = x"" ] && echo -e "\e[41;1m No ghc \e[0m" || \
