@@ -33,6 +33,7 @@ char itoc(int v)
 		fprintf(stderr,"出错了\n");
 		exit (1);
 	}
+
 }
 int main(int argc, char* argv[])
 {
