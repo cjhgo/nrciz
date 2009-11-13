@@ -23,8 +23,8 @@ update:
 	@(printf "\033[1;1m正在更新代码, 请稍候... \033[1;0m\n" >&2)
 	@(a=$$(readlink Makefile); cd $${a%Makefile}; svn update)
 
-clean: $(BIN)
-	rm $^
+clean:
+	rm $(BIN)
 
 test: build
 	@(rm -f *~)
