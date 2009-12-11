@@ -32,9 +32,9 @@ void initmap()
 {
 	memset(g_map, 1, WIDTH * HEIGHT * sizeof(char));
 	srand(time(NULL));
-	for (int i = 1; i < HEIGHT - 10; i+=10) {
-		for (int j = 1; j < WIDTH - 10; j+=10) {
-			int val = !(rand() % 3);
+	for (int i = 10; i < HEIGHT - 10; i+=10) {
+		for (int j = 10; j < WIDTH - 10; j+=10) {
+			int val = ((rand() % 3) == 0 ? 1 : 0);
 			for (int y = i; y < i + 10; y++)
 				for (int x = j; x < j + 10; x++)
 					g_map[y][x] = val;
@@ -66,7 +66,7 @@ bool check_map(int x, int y)
 {
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return true;
-	return g_map[y][x];
+	return g_map[y][x] == 1;
 }
 
 
@@ -83,15 +83,21 @@ static void draw_brush (GtkWidget *widget, gint x, gint y)
 	update_rect.height = 1;
 
 	/* Paint to the pixmap, where we store our state */
-	if (g_map[y][x]) {
+	if (g_map[y][x] == 1) {
 		gdk_draw_rectangle (pixmap,
 				widget->style->black_gc,
 				TRUE,
 				update_rect.x, update_rect.y,
 				update_rect.width, update_rect.height);
-	} else {
+	} else if (g_map[y][x] == 0) {
 		gdk_draw_rectangle (pixmap,
 				widget->style->white_gc,
+				TRUE,
+				update_rect.x, update_rect.y,
+				update_rect.width, update_rect.height);
+	} else  {
+		gdk_draw_rectangle (pixmap,
+				widget->style->dark_gc[1],
 				TRUE,
 				update_rect.x, update_rect.y,
 				update_rect.width, update_rect.height);
