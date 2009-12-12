@@ -34,7 +34,7 @@ void initmap()
 	srand(time(NULL));
 	for (int i = 10; i < HEIGHT - 10; i+=10) {
 		for (int j = 10; j < WIDTH - 10; j+=10) {
-			int val = ((rand() % 3) == 0 ? 1 : 0);
+			int val = !((rand() % 3));
 			for (int y = i; y < i + 10; y++)
 				for (int x = j; x < j + 10; x++)
 					g_map[y][x] = val;
@@ -42,31 +42,12 @@ void initmap()
 		}
 	}
 }
-void drawmap()
-{
-	for (int i = 0; i < HEIGHT; i++) {
-		for (int j = 0; j < WIDTH; j++) {
-			switch (g_map[i][j]) {
-				case 0:
-					printf(" ");
-					break;
-				case 1:
-					printf("+");
-					break;
-				case 2:
-					printf("*");
-					break;
-			}
-		}
-		printf("\n");
-	}
-}
 
 bool check_map(int x, int y)
 {
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return true;
-	return g_map[y][x] == 1;
+	return g_map[y][x];
 }
 
 
@@ -75,33 +56,33 @@ static GdkPixmap *pixmap = NULL;
 static void draw_brush (GtkWidget *widget, gint x, gint y)
 {
 
-	GdkRectangle update_rect;
+	//GdkRectangle update_rect;
 
-	update_rect.x = x;
-	update_rect.y = y;
-	update_rect.width = 1;
-	update_rect.height = 1;
+	//update_rect.x = x;
+	//update_rect.y = y;
+	//update_rect.width = 1;
+	//update_rect.height = 1;
 
 	/* Paint to the pixmap, where we store our state */
-	if (g_map[y][x] == 1) {
-		gdk_draw_rectangle (pixmap,
+	if (g_map[y][x]) {
+		gdk_draw_point(pixmap,
 				widget->style->black_gc,
-				TRUE,
-				update_rect.x, update_rect.y,
-				update_rect.width, update_rect.height);
-	} else if (g_map[y][x] == 0) {
-		gdk_draw_rectangle (pixmap,
-				widget->style->white_gc,
-				TRUE,
-				update_rect.x, update_rect.y,
-				update_rect.width, update_rect.height);
+				x, y);
+		//gdk_draw_rectangle (pixmap,
+				//widget->style->black_gc,
+				//TRUE,
+				//update_rect.x, update_rect.y,
+				//update_rect.width, update_rect.height);
 	} else  {
-		gdk_draw_rectangle (pixmap,
-				widget->style->dark_gc[1],
-				TRUE,
-				update_rect.x, update_rect.y,
-				update_rect.width, update_rect.height);
-	}
+		gdk_draw_point(pixmap,
+				widget->style->white_gc,
+				x, y);
+		//gdk_draw_rectangle (pixmap,
+				//widget->style->white_gc,
+				//TRUE,
+				//update_rect.x, update_rect.y,
+				//update_rect.width, update_rect.height);
+	} 
 
 	/* Now invalidate the affected region of the drawing area. */
 	//gdk_window_invalidate_rect (widget->window,
@@ -111,7 +92,6 @@ static void draw_brush (GtkWidget *widget, gint x, gint y)
 
 static gboolean scribble_configure_event (GtkWidget *widget, GdkEventConfigure *event, gpointer data)
 {
-
 	if (pixmap)
 		g_object_unref (pixmap);
 
@@ -154,6 +134,26 @@ static gint scribble_expose (GtkWidget *widget, GdkEventExpose *event)
 	return FALSE;
 }
 
+static void draw_point(GtkWidget* widget, int x, int y)
+{
+
+	//GdkRectangle update_rect;
+
+	//update_rect.x = x;
+	//update_rect.y = y;
+	//update_rect.width = 1;
+	//update_rect.height = 1;
+
+	//gdk_draw_rectangle (pixmap,
+			//widget->style->dark_gc[1],
+			//TRUE,
+			//update_rect.x, update_rect.y,
+			//update_rect.width, update_rect.height);
+	gdk_draw_point(pixmap,
+			widget->style->dark_gc[1],
+			x, y);
+}
+
 static gboolean scribble_button_press_event (GtkWidget      *widget,
 		GdkEventButton *event,
 		gpointer        data)
@@ -181,16 +181,10 @@ static gboolean scribble_button_press_event (GtkWidget      *widget,
 			i++;
 			int x = p->x;
 			int y = p->y;
-			g_map[y][x] = 2;
+			draw_point(widget, x, y);
 			p = p->parent;
 		}
-		printf("i = %d\n", i);
 
-		for (int y = 0; y < 600; y++) {
-			for (int x = 0; x < 800; x++) {
-				draw_brush(widget, x, y);
-			}
-		}
 		GdkRectangle update_rect;
 
 		update_rect.x = 0;
