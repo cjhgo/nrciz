@@ -6,16 +6,12 @@ bool sifted[1 << 25];
 int np, primes[2100000];
 ll ans;
 
-void rec(int k, ll x, ll n, int odd)
+void rec(int k, int x, int n, int odd)
 {
-    if (x > n) return;
-    if (k == np || (double)x*primes[k]*primes[k] > n) {
-        if (odd) ans -= n/x;
-        else ans += n/x;
-        return;
-    }
-    rec(k+1, x, n, odd);
-    rec(k+1, x*primes[k]*primes[k], n, odd ^ 1);
+    if (odd) ans -= (ll)n*n/x/x;
+    else ans += (ll)n*n/x/x;
+    for (int i = k; i < np && x <= n/primes[i]; i++)
+        rec(i+1, x*primes[i], n, odd ^ 1);
 }
 
 int main()
@@ -27,7 +23,7 @@ int main()
             if (i%primes[j] == 0) break;
         }
     }
-
-    printf("%lld\n", (rec(0, 1, 1LL << 50, 0), ans));
+    rec(0, 1, 1 << 25, 0);
+    printf("%lld\n", ans);
     return 0;
 }
