@@ -1,11 +1,11 @@
---import Data.Array.IArray
---import Data.Array.MArray
---import Data.Array.IO
+import Data.Array.Unboxed
+import qualified Data.Array.Unsafe as U
+import Data.Array.IO
 import Control.Monad
---import Data.List
-import qualified Data.Vector.Unboxed as V
-import qualified Data.Vector.Generic as G
-import qualified Data.Vector.Generic.Mutable as GM
+import Data.List
+--import Data.Vector.Unboxed hiding (mapM_)
+--import qualified Data.Vector.Generic as G
+--import qualified Data.Vector.Generic.Mutable as GM
 
 
 -- 这道题可以用一个数组把算出来的结果保存起来
@@ -18,13 +18,13 @@ import qualified Data.Vector.Generic.Mutable as GM
 --    where num' | even num = num `div` 2
 --               | otherwise = 3 * num + 1
 --
--- 编译后再运行...
--- ghc -O2 --make 014-zlbruce
+---- 编译后再运行...
+---- ghc -O2 --make 014-zlbruce
 --main = print $ snd.maximum $ zip (map countChain [1..1000000]) [1..1000000]
 
 
 -- 使用数组存储中间的计算值
-maxSize = 1000000
+maxSize = 1000000 :: Integer
 -- 第一个元素为1,其他初始化为0
 --allTempValue :: Array Int Int
 --allTempValue = listArray (1, maxSize) $ 1:replicate (maxSize - 1) 0
@@ -48,62 +48,59 @@ maxSize = 1000000
 --              in (a', maxNum')
 --
 
---countChainV3 :: IOUArray Int Int -> Int -> IO Int
---countChainV3 num arr
---    | num > maxSize = do 
---        val <- if even num then countChainV3 (num `div` 2) arr else countChainV3 (3 * num + 1) arr
---        return (val + 1)
---    | otherwise = do
---        val <- readArray arr num
---        if val == 0 
---        then do
---            val' <- if even num then countChainV3 (num `div` 2) arr else countChainV3 (3 * num + 1) arr
---            writeArray arr num (val' + 1)
---            return (val' + 1)
---        else do
---            return val
---    
---main = do
---    arr <- newListArray (1, maxSize) $ 1:[0,0..] :: IO (IOUArray Int Int)
---    maxNum <- foldM (findMaxNum arr) 1 [1..maxSize]
---    print maxNum
---    where 
---        findMaxNum a maxNum num = do
---            valnum <- countChainV3 num a
---            valMax <- countChainV3 maxNum a
---            if valnum > valMax then return num else return maxNum
+countChainV3 arr num
+    | num > maxSize = countChainMain
+    | otherwise = do
+        val <- readArray arr num
+        if val == 0 
+          then do
+            val' <- countChainMain
+            writeArray arr num val'
+            return val'
+          else do
+            return val
+    where countChainMain = do
+            if even num
+              then countChainV3 arr (num `div` 2) >>= return.(+1)
+              else countChainV3 arr (3 * num + 1) >>= return.(+1)
+    
+main = do
+    marr <- newListArray (1, maxSize) $ 1:[0,0..] :: IO (IOUArray Integer Int)
+    mapM_ (countChainV3 marr) [1..maxSize]
+    arr <- U.unsafeFreeze marr :: IO (UArray Integer Int)
+    let maxNum = foldl' (findMaxNum arr) 1 [1..maxSize]
+    print (maxNum, arr!maxNum)
+    where 
+        findMaxNum a maxNum num =
+            let valnum = a!num
+                valMax = a!maxNum
+            in  if valnum > valMax then num else maxNum
 
 
 -- 使用Vector
---initVector :: V.Vector Int
-initVector = V.fromListN maxSize (1:1:[0,0..] :: [Int])
-
-countChainV4 num vec
-    | num >= maxSize = countChainMain
-    | otherwise = do
-        val <- GM.read vec num
-        if val == 0
-        then do
-            val' <- countChainMain
-            GM.write vec num val'
-            return val'
-        else do
-            return val
-    where 
-        countChainMain = 
-            if even num 
-            then
-                countChainV4 (num `div` 2) vec >>= return.(+1)
-            else
-                countChainV4 (3 * num + 1) vec >>= return.(+1)
-
-main = do
-    mvec <- V.unsafeThaw initVector
-    maxNum <- foldM (findMaxNum mvec) 1 [1..maxSize]
-    print maxNum
-    GM.read mvec maxNum >>= print
-    where
-        findMaxNum v maxNum num = do
-            valnum <- countChainV4 num v
-            valMax <- countChainV4 maxNum v
-            if valnum > valMax then return num else return maxNum
+--initVector :: Vector Int
+--initVector = fromListN (fromInteger maxSize) (1:1:[0,0..] :: [Int])
+--
+--countChainV4 vec num
+--    | num >= maxSize = countChainMain
+--    | otherwise = do
+--        val <- GM.read vec (fromInteger num)
+--        if val == 0
+--        then do
+--            val' <- countChainMain
+--            GM.write vec (fromInteger num) val'
+--            return val'
+--        else do
+--            return val
+--    where 
+--        countChainMain = 
+--            if even num 
+--                then countChainV4 vec (num `div` 2) >>= return.(+1)
+--                else countChainV4 vec (3 * num + 1) >>= return.(+1)
+--
+--main = do
+--    mvec <- unsafeThaw initVector
+--    mapM_ (countChainV4 mvec) [1..maxSize]
+--    vec <- unsafeFreeze mvec
+--    let maxNum = maxIndex vec
+--    print (maxNum, vec!maxNum)
