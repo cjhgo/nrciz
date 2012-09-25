@@ -1,3 +1,4 @@
+import Data.List
 import Data.IntSet (toList, fromList, member)
 
 
