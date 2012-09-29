@@ -11,7 +11,7 @@ genConProd res n t =
     else genConProd res' n t'
     where
         resLen    = length res
-        nubResLen = length $ nub res
+        nubResLen = length $ nub $ delete '0' res
         res'      = res ++ show (n * t)
         t'        = t + 1
 
